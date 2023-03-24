@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUSD, selectEUR, selectGBP } from 'redux/selectors';
+import {
+  selectUSD,
+  selectEUR,
+  selectGBP,
+  selectPLN,
+  selectAllCurrency,
+} from 'redux/selectors';
 import { FormWrap, InputsWrap } from './ConvertForm.styled';
 
 export const ConvertForm = () => {
@@ -11,30 +17,58 @@ export const ConvertForm = () => {
   const USD = useSelector(selectUSD);
   const EUR = useSelector(selectEUR);
   const GPB = useSelector(selectGBP);
+  const PLN = useSelector(selectPLN);
+
+  const all = useSelector(selectAllCurrency);
+  console.log(all);
 
   const calculateCurrency = (rate1, rate2, amount) => {
-    console.log(rate1, rate2, amount);
     const uahAmount = amount * rate1;
     const convertedAmount = (uahAmount / (rate2 * amount)) * amount;
-    return convertedAmount;
+    return convertedAmount.toFixed(4);
   };
-  useEffect(() => {
-    if (firstInput === '') return;
-    const rates = {
-      UAH: 1,
-      USD: USD[0].rate,
-      EUR: EUR[0].rate,
-      GPB: GPB[0].rate,
-    };
-    console.log(rates);
-    const convertedValue = calculateCurrency(
-      rates[firstSelect],
-      rates[secondSelect],
-      Number(firstInput)
-    );
-    console.log(convertedValue);
-    setSecondInput(String(convertedValue));
-  }, [firstInput, firstSelect, secondInput, secondSelect, USD, EUR, GPB]);
+
+  const rates = {
+    UAH: 1,
+    USD: USD[0].rate,
+    EUR: EUR[0].rate,
+    GPB: GPB[0].rate,
+    PLN: PLN[0].rate,
+  };
+
+  //   useEffect(() => {
+  //     if (firstInput === '') {
+  //       setSecondInput('');
+  //       return;
+  //     }
+
+  //     const convertedValue = calculateCurrency(
+  //       rates[firstSelect],
+  //       rates[secondSelect],
+  //       Number(firstInput)
+  //     );
+  //     setSecondInput(String(convertedValue));
+  //   }, [firstInput, firstSelect, secondInput, secondSelect, USD, EUR, GPB, PLN]);
+
+  //   useEffect(() => {
+  //   if (secondInput === '') {
+  //   setFirstInput('');
+  //   return;
+  // }
+  //     const rates = {
+  //       UAH: 1,
+  //       USD: USD[0].rate,
+  //       EUR: EUR[0].rate,
+  //       GPB: GPB[0].rate,
+  //       PLN: PLN[0].rate,
+  //     };
+  //     const convertedValue = calculateCurrency(
+  //       rates[secondSelect],
+  //       rates[firstSelect],
+  //       Number(secondInput)
+  //     );
+  //     setFirstInput(String(convertedValue));
+  //   }, [firstInput, firstSelect, secondInput, secondSelect, USD, EUR, GPB, PLN]);
 
   return (
     <FormWrap>
@@ -43,15 +77,28 @@ export const ConvertForm = () => {
           value={firstSelect}
           onChange={e => setFirstSelect(e.target.value)}
         >
-          <option value={'USD'}>USD</option>
-          <option value={'EUR'}>EUR</option>
-          <option value={'GPB'}>GPB</option>
-          <option value={'UAH'}>UAH</option>
+          <option value={'USD'}>{USD[0].txt}</option>
+          <option value={'EUR'}>{EUR[0].txt}</option>
+          <option value={'GPB'}>{GPB[0].txt}</option>
+          <option value={'PLN'}>{PLN[0].txt}</option>
+          <option value={'UAH'}>Гривня</option>
         </select>
         <input
           type="number"
           value={firstInput}
-          onChange={e => setFirstInput(e.target.value)}
+          onChange={e => {
+            setFirstInput(e.target.value);
+            if (firstInput === '') {
+              setSecondInput('');
+              //   return;
+            }
+            const convertedValue = calculateCurrency(
+              rates[firstSelect],
+              rates[secondSelect],
+              Number(firstInput)
+            );
+            setSecondInput(String(convertedValue));
+          }}
         ></input>
       </InputsWrap>
       <InputsWrap>
@@ -59,15 +106,28 @@ export const ConvertForm = () => {
           value={secondSelect}
           onChange={e => setSecondSelect(e.target.value)}
         >
-          <option value={'USD'}>USD</option>
-          <option value={'EUR'}>EUR</option>
-          <option value={'GPB'}>GPB</option>
-          <option value={'UAH'}>UAH</option>
+          <option value={'USD'}>{USD[0].txt}</option>
+          <option value={'EUR'}>{EUR[0].txt}</option>
+          <option value={'GPB'}>{GPB[0].txt}</option>
+          <option value={'PLN'}>{PLN[0].txt}</option>
+          <option value={'UAH'}>Гривня</option>
         </select>
         <input
           type="number"
           value={secondInput}
-          onChange={e => setSecondInput(e.target.value)}
+          onChange={e => {
+            setSecondInput(e.target.value);
+            if (secondInput === '') {
+              setFirstInput('');
+              //   return;
+            }
+            const convertedValue = calculateCurrency(
+              rates[secondSelect],
+              rates[firstSelect],
+              Number(secondInput)
+            );
+            setFirstInput(String(convertedValue));
+          }}
         ></input>
       </InputsWrap>
     </FormWrap>
