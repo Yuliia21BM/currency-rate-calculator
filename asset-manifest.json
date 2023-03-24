@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/currency-rate-calculator/static/css/main.26146098.css",
-    "main.js": "/currency-rate-calculator/static/js/main.554e7652.js",
+    "main.js": "/currency-rate-calculator/static/js/main.77c1a649.js",
     "static/media/logo-NBU.png": "/currency-rate-calculator/static/media/logo-NBU.3fe666351109d6d081bc.png",
     "index.html": "/currency-rate-calculator/index.html",
     "main.26146098.css.map": "/currency-rate-calculator/static/css/main.26146098.css.map",
-    "main.554e7652.js.map": "/currency-rate-calculator/static/js/main.554e7652.js.map"
+    "main.77c1a649.js.map": "/currency-rate-calculator/static/js/main.77c1a649.js.map"
   },
   "entrypoints": [
     "static/css/main.26146098.css",
-    "static/js/main.554e7652.js"
+    "static/js/main.77c1a649.js"
   ]
 }
