@@ -12,7 +12,6 @@ import {
   selectMXN,
   selectCHF,
   selectSEK,
-  selectAllCurrency,
 } from 'redux/selectors';
 import {
   FormWrap,
@@ -33,9 +32,6 @@ export const ConvertForm = () => {
   const MXN = useSelector(selectMXN);
   const CHF = useSelector(selectCHF);
   const SEK = useSelector(selectSEK);
-
-  const all = useSelector(selectAllCurrency);
-  console.log(all);
 
   const rates = {
     UAH: 1,
