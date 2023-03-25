@@ -1,13 +1,15 @@
 import { Container } from 'components/utiles/Container';
 import { ConvertForm } from 'components/ConvertForm/ConvertForm';
-import { StyledTitle } from './Main.styled';
+import { StyledTitle, MainWrap } from './Main.styled';
 
 export const Main = () => {
   return (
     <main>
       <Container>
-        <StyledTitle>Конвертер валют</StyledTitle>
-        <ConvertForm />
+        <MainWrap>
+          <StyledTitle>Конвертер валют</StyledTitle>
+          <ConvertForm />
+        </MainWrap>
       </Container>
     </main>
   );

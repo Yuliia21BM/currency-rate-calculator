@@ -1,11 +1,13 @@
 import { Container } from 'components/utiles/Container';
-import { StyledFooter } from './Footer.styled';
+import { StyledFooter, StyledText } from './Footer.styled';
 
 export const Footer = () => {
   return (
     <StyledFooter>
       <Container>
-        <p>Footer</p>
+        <StyledText>
+          Your personal currency converter is always in touch
+        </StyledText>
       </Container>
     </StyledFooter>
   );
