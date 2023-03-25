@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const FormWrap = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   padding-top: 50px;
   @media screen and (min-width: 768px) {
     gap: 30px;
+    flex-direction: row;
   }
   @media screen and (min-width: 1280px) {
     gap: 50px;
@@ -16,6 +18,7 @@ export const FormWrap = styled.div`
 export const InputsWrap = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   @media screen and (min-width: 768px) {
     gap: 10px;
@@ -26,7 +29,7 @@ export const InputsWrap = styled.div`
 `;
 
 export const StuledInput = styled.input`
-  width: 70px;
+  width: 150px;
   outline: none;
   appearance: none;
   -webkit-appearance: none;
@@ -55,7 +58,7 @@ export const StuledInput = styled.input`
   }
 
   @media screen and (min-width: 480px) {
-    width: 100px;
+    width: 170px;
   }
   @media screen and (min-width: 768px) {
     width: 160px;
@@ -68,7 +71,7 @@ export const StuledInput = styled.input`
 `;
 
 export const StuledSelect = styled.select`
-  width: 60px;
+  width: 130px;
   /* overflow-x: scroll; */
   /* scroll-behavior: smooth; */
   background-color: #315842;
@@ -83,10 +86,10 @@ export const StuledSelect = styled.select`
     border-color: #fff;
   }
   @media screen and (min-width: 480px) {
-    width: 90px;
+    width: 150px;
   }
   @media screen and (min-width: 768px) {
-    width: 150px;
+    width: 160px;
     font-size: 14px;
   }
   @media screen and (min-width: 1280px) {
