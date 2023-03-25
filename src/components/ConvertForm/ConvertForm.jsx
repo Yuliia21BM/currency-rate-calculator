@@ -24,7 +24,7 @@ export const ConvertForm = () => {
 
   const [firstSelect, setFirstSelect] = useState('USD');
   const [secondSelect, setSecondSelect] = useState('UAH');
-  const [firstInput, setFirstInput] = useState('100');
+  const [firstInput, setFirstInput] = useState('1');
   const [secondInput, setSecondInput] = useState(rates.USD);
 
   const calculateCurrency = (rate1, rate2, value) => {
