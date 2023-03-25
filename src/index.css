@@ -10,6 +10,9 @@ body {
   background-color: #fff;
   color: black;
   font-size: 18px;
+  background-image: url(./image/bg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {
