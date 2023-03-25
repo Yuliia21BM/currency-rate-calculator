@@ -1,32 +1,18 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { selectUSD, selectEUR, selectGBP, selectPLN } from 'redux/selectors';
 import {
-  selectUSD,
-  selectEUR,
-  selectGBP,
-  selectPLN,
-  selectAllCurrency,
-} from 'redux/selectors';
-import { FormWrap, InputsWrap } from './ConvertForm.styled';
+  FormWrap,
+  InputsWrap,
+  StuledInput,
+  StuledSelect,
+} from './ConvertForm.styled';
 
 export const ConvertForm = () => {
-  const [firstInput, setFirstInput] = useState('1');
-  const [firstSelect, setFirstSelect] = useState('USD');
-  const [secondInput, setSecondInput] = useState('');
-  const [secondSelect, setSecondSelect] = useState('UAH');
   const USD = useSelector(selectUSD);
   const EUR = useSelector(selectEUR);
   const GPB = useSelector(selectGBP);
   const PLN = useSelector(selectPLN);
-
-  const all = useSelector(selectAllCurrency);
-  console.log(all);
-
-  const calculateCurrency = (rate1, rate2, amount) => {
-    const uahAmount = amount * rate1;
-    const convertedAmount = (uahAmount / (rate2 * amount)) * amount;
-    return convertedAmount.toFixed(4);
-  };
 
   const rates = {
     UAH: 1,
@@ -36,99 +22,90 @@ export const ConvertForm = () => {
     PLN: PLN[0].rate,
   };
 
-  //   useEffect(() => {
-  //     if (firstInput === '') {
-  //       setSecondInput('');
-  //       return;
-  //     }
+  const [firstSelect, setFirstSelect] = useState('USD');
+  const [secondSelect, setSecondSelect] = useState('UAH');
+  const [firstInput, setFirstInput] = useState('100');
+  const [secondInput, setSecondInput] = useState(rates.USD);
 
-  //     const convertedValue = calculateCurrency(
-  //       rates[firstSelect],
-  //       rates[secondSelect],
-  //       Number(firstInput)
-  //     );
-  //     setSecondInput(String(convertedValue));
-  //   }, [firstInput, firstSelect, secondInput, secondSelect, USD, EUR, GPB, PLN]);
+  const calculateCurrency = (rate1, rate2, value) => {
+    // const locale = navigator.language;
+    // return value
+    //   ? new Intl.NumberFormat(locale).format((value * rate1) / rate2)
+    //   : '';
+    return value ? ((value * rate1) / rate2).toFixed(4) : '';
+  };
 
-  //   useEffect(() => {
-  //   if (secondInput === '') {
-  //   setFirstInput('');
-  //   return;
-  // }
-  //     const rates = {
-  //       UAH: 1,
-  //       USD: USD[0].rate,
-  //       EUR: EUR[0].rate,
-  //       GPB: GPB[0].rate,
-  //       PLN: PLN[0].rate,
-  //     };
-  //     const convertedValue = calculateCurrency(
-  //       rates[secondSelect],
-  //       rates[firstSelect],
-  //       Number(secondInput)
-  //     );
-  //     setFirstInput(String(convertedValue));
-  //   }, [firstInput, firstSelect, secondInput, secondSelect, USD, EUR, GPB, PLN]);
+  const handleFirstInputChange = e => {
+    setFirstInput(e.target.value);
+    const convertedValue = calculateCurrency(
+      rates[firstSelect],
+      rates[secondSelect],
+      e.target.value
+    );
+    setSecondInput(convertedValue);
+  };
+
+  const handleSecondInputChange = e => {
+    setSecondInput(e.target.value);
+    const convertedValue = calculateCurrency(
+      rates[secondSelect],
+      rates[firstSelect],
+      e.target.value
+    );
+    setFirstInput(convertedValue);
+  };
+
+  const handleFirstSelectChange = e => {
+    setFirstSelect(e.target.value);
+    const convertedValue = calculateCurrency(
+      rates[secondSelect],
+      rates[e.target.value],
+      secondInput
+    );
+    setFirstInput(convertedValue);
+  };
+
+  const handleSecondSelectChange = e => {
+    setSecondSelect(e.target.value);
+    const convertedValue = calculateCurrency(
+      rates[firstSelect],
+      rates[e.target.value],
+      firstInput
+    );
+    setSecondInput(convertedValue);
+  };
 
   return (
     <FormWrap>
       <InputsWrap>
-        <select
-          value={firstSelect}
-          onChange={e => setFirstSelect(e.target.value)}
-        >
+        <StuledSelect value={firstSelect} onChange={handleFirstSelectChange}>
           <option value={'USD'}>{USD[0].txt}</option>
           <option value={'EUR'}>{EUR[0].txt}</option>
           <option value={'GPB'}>{GPB[0].txt}</option>
           <option value={'PLN'}>{PLN[0].txt}</option>
-          <option value={'UAH'}>Гривня</option>
-        </select>
-        <input
+          <option value={'UAH'}>Українська гривня</option>
+        </StuledSelect>
+        <StuledInput
+          min="0"
           type="number"
           value={firstInput}
-          onChange={e => {
-            setFirstInput(e.target.value);
-            if (firstInput === '') {
-              setSecondInput('');
-              //   return;
-            }
-            const convertedValue = calculateCurrency(
-              rates[firstSelect],
-              rates[secondSelect],
-              Number(firstInput)
-            );
-            setSecondInput(String(convertedValue));
-          }}
-        ></input>
+          onChange={handleFirstInputChange}
+        />
       </InputsWrap>
       <InputsWrap>
-        <select
-          value={secondSelect}
-          onChange={e => setSecondSelect(e.target.value)}
-        >
+        <StuledSelect value={secondSelect} onChange={handleSecondSelectChange}>
           <option value={'USD'}>{USD[0].txt}</option>
           <option value={'EUR'}>{EUR[0].txt}</option>
           <option value={'GPB'}>{GPB[0].txt}</option>
           <option value={'PLN'}>{PLN[0].txt}</option>
-          <option value={'UAH'}>Гривня</option>
-        </select>
-        <input
+          <option value={'UAH'}>Українська гривня</option>
+        </StuledSelect>
+        <StuledInput
+          min="0"
           type="number"
           value={secondInput}
-          onChange={e => {
-            setSecondInput(e.target.value);
-            if (secondInput === '') {
-              setFirstInput('');
-              //   return;
-            }
-            const convertedValue = calculateCurrency(
-              rates[secondSelect],
-              rates[firstSelect],
-              Number(secondInput)
-            );
-            setFirstInput(String(convertedValue));
-          }}
-        ></input>
+          onChange={handleSecondInputChange}
+        />
       </InputsWrap>
     </FormWrap>
   );
