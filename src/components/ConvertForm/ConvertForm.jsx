@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectUSD, selectEUR, selectGBP, selectPLN } from 'redux/selectors';
+import {
+  selectUSD,
+  selectEUR,
+  selectGBP,
+  selectPLN,
+  selectAUD,
+  selectCAD,
+  selectJPY,
+  selectCNY,
+  selectMXN,
+  selectCHF,
+  selectSEK,
+  selectAllCurrency,
+} from 'redux/selectors';
 import {
   FormWrap,
   InputsWrap,
@@ -13,6 +26,16 @@ export const ConvertForm = () => {
   const EUR = useSelector(selectEUR);
   const GPB = useSelector(selectGBP);
   const PLN = useSelector(selectPLN);
+  const AUD = useSelector(selectAUD);
+  const CAD = useSelector(selectCAD);
+  const JPY = useSelector(selectJPY);
+  const CNY = useSelector(selectCNY);
+  const MXN = useSelector(selectMXN);
+  const CHF = useSelector(selectCHF);
+  const SEK = useSelector(selectSEK);
+
+  const all = useSelector(selectAllCurrency);
+  console.log(all);
 
   const rates = {
     UAH: 1,
@@ -20,6 +43,13 @@ export const ConvertForm = () => {
     EUR: EUR[0].rate,
     GPB: GPB[0].rate,
     PLN: PLN[0].rate,
+    AUD: AUD[0].rate,
+    CAD: CAD[0].rate,
+    JPY: JPY[0].rate,
+    CNY: CNY[0].rate,
+    MXN: MXN[0].rate,
+    CHF: CHF[0].rate,
+    SEK: SEK[0].rate,
   };
 
   const [firstSelect, setFirstSelect] = useState('USD');
@@ -58,21 +88,21 @@ export const ConvertForm = () => {
   const handleFirstSelectChange = e => {
     setFirstSelect(e.target.value);
     const convertedValue = calculateCurrency(
-      rates[secondSelect],
       rates[e.target.value],
-      secondInput
+      rates[secondSelect],
+      firstInput
     );
-    setFirstInput(convertedValue);
+    setSecondInput(convertedValue);
   };
 
   const handleSecondSelectChange = e => {
     setSecondSelect(e.target.value);
     const convertedValue = calculateCurrency(
-      rates[firstSelect],
       rates[e.target.value],
-      firstInput
+      rates[firstSelect],
+      secondInput
     );
-    setSecondInput(convertedValue);
+    setFirstInput(convertedValue);
   };
 
   return (
@@ -84,6 +114,13 @@ export const ConvertForm = () => {
           <option value={'GPB'}>{GPB[0].txt}</option>
           <option value={'PLN'}>{PLN[0].txt}</option>
           <option value={'UAH'}>Українська гривня</option>
+          <option value={'AUD'}>{AUD[0].txt}</option>
+          <option value={'CAD'}>{CAD[0].txt}</option>
+          <option value={'CHF'}>{CHF[0].txt}</option>
+          <option value={'SEK'}>{SEK[0].txt}</option>
+          <option value={'JPY'}>{JPY[0].txt}</option>
+          <option value={'CNY'}>{CNY[0].txt}</option>
+          <option value={'MXN'}>{MXN[0].txt}</option>
         </StuledSelect>
         <StuledInput
           min="0"
@@ -99,6 +136,13 @@ export const ConvertForm = () => {
           <option value={'GPB'}>{GPB[0].txt}</option>
           <option value={'PLN'}>{PLN[0].txt}</option>
           <option value={'UAH'}>Українська гривня</option>
+          <option value={'AUD'}>{AUD[0].txt}</option>
+          <option value={'CAD'}>{CAD[0].txt}</option>
+          <option value={'CHF'}>{CHF[0].txt}</option>
+          <option value={'SEK'}>{SEK[0].txt}</option>
+          <option value={'JPY'}>{JPY[0].txt}</option>
+          <option value={'CNY'}>{CNY[0].txt}</option>
+          <option value={'MXN'}>{MXN[0].txt}</option>
         </StuledSelect>
         <StuledInput
           min="0"

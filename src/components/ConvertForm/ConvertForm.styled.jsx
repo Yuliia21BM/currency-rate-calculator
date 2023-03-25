@@ -72,8 +72,6 @@ export const StuledInput = styled.input`
 
 export const StuledSelect = styled.select`
   width: 130px;
-  /* overflow-x: scroll; */
-  /* scroll-behavior: smooth; */
   background-color: #315842;
   padding: 10px;
   border: 2px solid #ccc;
@@ -97,62 +95,3 @@ export const StuledSelect = styled.select`
     font-size: 18px;
   }
 `;
-
-// export const FormWrap = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   gap: 40px;
-//   padding-top: 50px;
-//   padding-bottom: 100px;
-// `;
-
-// export const InputsWrap = styled.div`
-//   display: flex;
-//   align-items: center;
-//   gap: 15px;
-// `;
-
-// export const StuledInput = styled.input`
-//   width: 100px;
-//   outline: none;
-//   appearance: none;
-//   -webkit-appearance: none;
-//   -moz-appearance: none;
-
-//   background-color: #f5f5f5;
-//   padding: 15px;
-//   border: 2px solid #ccc;
-//   border-radius: 4px;
-//   font-size: 18px;
-//   text-align: center;
-//   &:hover,
-//   &:focus,
-//   &:active {
-//     border-color: #315842;
-//   }
-
-//   &::-webkit-inner-spin-button {
-//     padding: 5px;
-//     right: 5px;
-//   }
-
-//   &::-webkit-outer-spin-button {
-//     padding: 5px;
-//     left: 5px;
-//   }
-// `;
-
-// export const StuledSelect = styled.select`
-//   width: 50px;
-//   background-color: #315842;
-//   padding: 15px;
-//   border: 2px solid #ccc;
-//   color: #fff;
-//   border-radius: 4px;
-//   font-size: 18px;
-//   text-align: center;
-//   &:hover,
-//   &:focus {
-//     border-color: #fff;
-//   }
-// `;
