@@ -84,21 +84,21 @@ export const ConvertForm = () => {
   const handleFirstSelectChange = e => {
     setFirstSelect(e.target.value);
     const convertedValue = calculateCurrency(
-      rates[e.target.value],
       rates[secondSelect],
-      firstInput
+      rates[e.target.value],
+      secondInput
     );
-    setSecondInput(convertedValue);
+    setFirstInput(convertedValue);
   };
 
   const handleSecondSelectChange = e => {
     setSecondSelect(e.target.value);
     const convertedValue = calculateCurrency(
-      rates[e.target.value],
       rates[firstSelect],
-      secondInput
+      rates[e.target.value],
+      firstInput
     );
-    setFirstInput(convertedValue);
+    setSecondInput(convertedValue);
   };
 
   return (
